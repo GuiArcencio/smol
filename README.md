@@ -41,12 +41,13 @@ int main() {
         A[i] = 1.0;
 
     opencl_malloc(
-        ocl, &d_A, SIZE * sizeof(double), A,
-        CL_MEM_READ_ONLY | CL_MEM_HOST_WRITE_ONLY | CL_MEM_COPY_HOST_PTR
+        ocl, &d_A, SIZE * sizeof(double)
     );
     opencl_malloc(
-        ocl, &d_B, SIZE * sizeof(double), NULL,
-        CL_MEM_WRITE_ONLY | CL_MEM_HOST_READ_ONLY
+        ocl, &d_B, SIZE * sizeof(double)
+    );
+    opencl_memcpy(
+        ocl, d_A, A, SIZE * sizeof(double), opencl_memcpy_host_to_device
     );
 
     void *kernel_args[] = { &d_A, &d_B };

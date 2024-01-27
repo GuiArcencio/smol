@@ -152,7 +152,7 @@ cl_int opencl_synchronize(OpenCL ocl) {
     return clFinish(ocl->queue);
 }
 
-cl_int opencl_malloc(
+cl_int _opencl_malloc_raw(
     OpenCL ocl,
     cl_mem *buf_ptr,
     size_t size,
@@ -173,6 +173,20 @@ cl_int opencl_malloc(
     *buf_ptr = buf;
     return CL_SUCCESS;
 
+}
+
+cl_int opencl_malloc(
+    OpenCL ocl,
+    cl_mem *buf_ptr,
+    size_t size
+) {
+    return _opencl_malloc_raw(
+        ocl,
+        buf_ptr,
+        size,
+        NULL,
+        CL_MEM_READ_WRITE
+    );
 }
 
 cl_int _opencl_memcpy(
@@ -208,7 +222,7 @@ cl_int _opencl_memcpy(
                 blocking,
                 0,
                 n_bytes,
-                destination,
+                source,
                 0, NULL, NULL
             );
             if (err != CL_SUCCESS) return err;

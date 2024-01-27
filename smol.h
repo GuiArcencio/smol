@@ -59,9 +59,7 @@ cl_int opencl_synchronize(OpenCL ocl);
 cl_int opencl_malloc(
     OpenCL ocl,
     cl_mem *buf_ptr,
-    size_t size,
-    void *host_ptr,
-    cl_mem_flags flags
+    size_t size
 );
 
 cl_int opencl_memcpy(
