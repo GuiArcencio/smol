@@ -88,4 +88,4 @@ gcc -lOpenCL main.c smol.c -o prog && ./prog
 
 ## Warning
 
-This library is intended to be as minimal as possible. The initialization code will simply choose the first device it can found. Do not trust this code for serious work.
+This library is intended to be as minimal as possible. The initialization code will simply choose the first device it can find. Do not trust this code for serious work.
